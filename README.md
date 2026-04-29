@@ -1,4 +1,4 @@
-# DRONEQUBE Görev 4 — Yabancı Ot Tespiti ve Konumlandırma
+# Yabancı Ot Tespiti ve Konumlandırma
 
 Mısır tarlalarındaki yabancı otların **YOLOv8l-seg** modeli ile instance segmentation yöntemiyle tespiti, sayımı, alan ölçümü ve konumlandırılması.
 
@@ -36,14 +36,6 @@ DRONEQUBE_Gorev4/
 │   └── labels/test/    # YOLO formatında etiketler
 │
 ├── sonuclar/           # Çıktı dizini (otomatik oluşur)
-│   ├── Gorev4_Test_Raporu.pdf
-│   ├── gorseller/
-│   ├── goruntu_ozet.csv
-│   ├── tespit_detay.csv
-│   ├── tarihsel_ozet.csv
-│   ├── parsel_yogunluk.csv
-│   ├── sonuclar.json
-│   └── tekil_<isim>/   # test_single.py çıktıları
 │
 └── README.md
 ```
@@ -53,15 +45,9 @@ DRONEQUBE_Gorev4/
 ## Kurulum
 
 ```bash
-# Repoyu klonla
-git clone https://github.com/<kullanici>/DRONEQUBE_Gorev4.git
-cd DRONEQUBE_Gorev4
-
 # Gerekli kütüphaneleri kur
 pip install ultralytics fpdf2 opencv-python matplotlib numpy
 ```
-
-> **Not:** `best.pt` dosyası büyük olduğundan Git LFS kullanmanız önerilir.
 
 ---
 
@@ -125,7 +111,7 @@ python train.py
 ```
 
 > Veri seti ZIP dosyasının yolunu ve çıktı dizinini script soracaktır.  
-> Eğitim süresi GPU'ya bağlı olarak ~30-60 dakika sürer.
+> Eğitim süresi GPU'ya bağlı olarak ~20-60 dakika sürer.
 
 ---
 
@@ -133,8 +119,8 @@ python train.py
 
 | ID | Sınıf | Açıklama |
 |----|-------|----------|
-| 0 | `crop` | Mısır (*Zea mays*) |
-| 1 | `weed` | Yabancı otlar (tilki kuyruğu, darıcan, horozibiği vb.) |
+| 0 | `crop` | Mısır |
+| 1 | `weed` | Yabancı otlar |
 
 ---
 
@@ -150,17 +136,6 @@ python train.py
 
 ---
 
-## Teknik Detaylar
-
-- **Optimizer:** AdamW
-- **Görüntü boyutu:** 1024 px
-- **Veri artırma:** Mosaic, CopyPaste, MixUp
-- **Confidence eşiği:** 0.15
-- **Koordinat dönüşümü:** `piksel × GSD (0.0025) = metre`
-- **Alan hesabı:** `piksel_sayısı × GSD² = m²`
-
----
-
 ## Sonuçlar
 
 | Metrik | Değer |
@@ -171,21 +146,3 @@ python train.py
 | Ortalama eşleşme | %77.6 |
 
 ---
-
-## Referanslar
-
-```bibtex
-@InProceedings{Celikkan_2025_WACV,
-    author    = {Celikkan, Ekin and Kunzmann, Timo and others},
-    title     = {WeedsGalore: A Multispectral and Multitemporal UAV-Based Dataset for Crop-Weed Segmentation},
-    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
-    year      = {2025},
-    pages     = {4767--4777}
-}
-```
-
----
-
-## Lisans
-
-Bu proje DRONEQUBE yarışması kapsamında geliştirilmiştir.
