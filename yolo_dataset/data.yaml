@@ -1,0 +1,8 @@
+path: /content/drive/MyDrive/DRONEQUBE/yolo_dataset
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: crop
+  1: weed
