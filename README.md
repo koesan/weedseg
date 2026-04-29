@@ -2,7 +2,7 @@
 
 Mısır tarlalarındaki yabancı otların **YOLOv8l-seg** modeli ile instance segmentation yöntemiyle tespiti, sayımı, alan ölçümü ve konumlandırılması.
 
-> **Veri Seti:** [WeedsGalore](https://zenodo.org/records/13628857) (Celikkan et al., WACV 2025)  
+> **Veri Seti:** [WeedsGalore](https://github.com/GFZ/weedsgalore) (Celikkan et al., WACV 2025)  
 > **Model:** YOLOv8l-seg (45.9M parametre)  
 > **GSD:** 2.5 mm/px — 5 metre uçuş yüksekliği
 
