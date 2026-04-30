@@ -2,6 +2,8 @@
 
 ArduPilot SITL + Gazebo + LiDAR + Derinlik Kamera ile engel algılama ve Return-to-Home simülasyonu.
 
+https://github.com/user-attachments/assets/9d28cdd8-09d6-4c63-a915-08e45fd32d03
+
 ## Senaryo
 
 1. Drone Home konumunda kalkış yapar (5m irtifa)
