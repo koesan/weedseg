@@ -14,16 +14,12 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 from ultralytics import YOLO
 
-# Kullanici girisleri
-
 DATASET_ZIP = input("Veri seti ZIP yolu: ").strip()
 SAVE_DIR    = input("Cikti kayit yolu: ").strip()
 
 os.makedirs(SAVE_DIR, exist_ok=True)
 YOLO_DIR  = os.path.join(SAVE_DIR, "yolo_dataset")
 TRAIN_DIR = os.path.join(SAVE_DIR, "egitim")
-
-# Veri setini cikart 
 
 EXTRACT_DIR = "/content/_weedsgalore_tmp"
 if os.path.exists(EXTRACT_DIR):
@@ -171,7 +167,6 @@ with open(yaml_path, "w") as f:
 print(f"data.yaml -> {yaml_path}")
 
 # Model egitimi — YOLOv8l-seg 
-
 print(f"GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'YOK'}")
 
 model = YOLO("yolov8l-seg.pt")
@@ -211,7 +206,6 @@ model.train(
 )
 
 # Test seti degerlendirme 
-
 best_path  = os.path.join(TRAIN_DIR, "yolov8l_seg", "weights", "best.pt")
 best_model = YOLO(best_path)
 
