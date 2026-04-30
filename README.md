@@ -40,6 +40,8 @@ pip install torch torchvision ultralytics opencv-python numpy matplotlib fpdf
 
 Train kodları Google Colab için geliştirilmiştir. Kodları Colab ortamına yükleyip veri setlerini zip dosyası olarak belirtmeniz ve çıktıların kaydedileceği yolu tanımlamanız yeterlidir. Geri kalan işlemler kod tarafından otomatik olarak gerçekleştirilecektir.
 
+[Google Colab Linki](https://colab.research.google.com/drive/1Vyo_d0a6u6m7yF-0uK3TXFLvJzSdLr-U?usp=drive_link)
+
 ### WeedsGalore (YOLO) Kullanımı
 1. İndirdiğiniz YOLOv8 `best.pt` dosyasını `WeedsGalore` klasörünün içine atın.
 2. Terminalden klasöre girin: `cd WeedsGalore`
