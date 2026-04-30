@@ -1,23 +1,35 @@
+<<<<<<< HEAD
 # Yabancı Ot Tespiti ve Konumlandırma
+=======
+# DRONEQUBE - Yabancı Ot Tespiti ve Konumlandırma (Görev 4)
+>>>>>>> cd5d68b (update crop and weed detection and segmentation project)
 
-Mısır tarlalarındaki yabancı otların **YOLOv8l-seg** modeli ile instance segmentation yöntemiyle tespiti, sayımı, alan ölçümü ve konumlandırılması.
+Bu depo, DRONEQUBE İnsansız Hava Aracı (İHA) sistemleri için tarım alanlarındaki yabancı otların (weed) tespit edilmesi ve gerçek dünya koordinatlarında (georeference) konumlandırılması amacıyla geliştirilmiş iki farklı projeyi içermektedir.
 
+<<<<<<< HEAD
 > **Veri Seti:** [WeedsGalore](https://github.com/GFZ/weedsgalore) (Celikkan et al., WACV 2025)  
 > **Model:** YOLOv8l-seg (45.9M parametre)  
 > **GSD:** 2.5 mm/px — 5 metre uçuş yüksekliği
+=======
+Aşağıdaki Google Drive bağlantısından gerekli model ağırlıklarını (`best.pt`) indirip, her modelin kendi klasörüne eklemeniz gerekmektedir:
+📥 **[Model Ağırlıklarını İndir (Google Drive)](https://drive.google.com/drive/folders/1nB4qQeIFdyFNywe3V92VN5Hj5yg3jVsz?usp=drive_link)**
+>>>>>>> cd5d68b (update crop and weed detection and segmentation project)
 
----
+## Proje Yapısı ve Farkları
 
-## Özellikler
+Depo içerisinde iki farklı yaklaşım ve model barındıran iki klasör bulunmaktadır:
 
-- Kültür bitkisi (mısır) ve yabancı ot instance segmentation
-- GSD tabanlı piksel → metre koordinat dönüşümü
-- Alan ölçümü (m²) ve yoğunluk analizi (%)
-- Tarihsel bitki büyümesi ve yabancı ot yayılım grafiği
-- Her görüntü için GT vs tahmin karşılaştırma raporu
-- Otomatik PDF rapor üretimi
-- Tekil görüntü analizi (etiket gerektirmez)
+### 1. WeedsGalore (YOLOv8l-seg)
+Bu proje, mısır tarlalarındaki yabancı otları **Nesne Bölütleme (Instance Segmentation)** yöntemiyle tespit eder. 
+- **Veri Seti:** WeedsGalore (Farklı büyüme evrelerini içerir).
+- **Model:** YOLOv8l-seg.
+- **Mantık:** Yabancı otları nesne olarak algılar, poligon çıkarır ve GSD (Yer Örnekleme Mesafesi) kullanarak lokal metre cinsinden (X, Y) alan/yoğunluk hesabı yapar.
+- **Kullanım Yeri:** Erken büyüme evrelerindeki ayrık otların tespiti için idealdir.
+- **Kaynaklar:** 
+  - **Makale:** [WeedsGalore: A Multispectral and Multitemporal UAV-based Dataset... (ArXiv)](https://arxiv.org/abs/2502.13103)
+  - **Veri Seti:** [WeedsGalore GitHub Deposu](https://github.com/GFZ/weedsgalore)
 
+<<<<<<< HEAD
 ---
 
 ## Dosya Yapısı
@@ -56,23 +68,36 @@ pip install ultralytics fpdf2 opencv-python matplotlib numpy
 ### 1. Toplu Test (26 görüntü)
 
 Test setindeki tüm görüntüleri analiz eder, PDF rapor ve CSV çıktıları üretir:
+=======
+### 2. WeedyRice (DeepLabV3+)
+Bu ek çalışma, yoğun bitki örtüsünde nesne sayımının yarattığı hataları (over-count) önlemek amacıyla **Semantik Segmentasyon (Alan Bazlı)** olarak geliştirilmiştir.
+- **Veri Seti:** WeedyRice-RGBMS-DB.
+- **Model:** DeepLabV3+
+- **Mantık:** Bitkileri tek tek saymaz, yalnızca "yabancı ot alanını" ölçer. Metadata dosyasındaki gerçek GPS verilerini kullanarak tespitleri harita üzerinde küresel koordinatlarla (WGS84 Enlem/Boylam) konumlandırır.
+- **Kullanım Yeri:** Bitkilerin birbirine geçtiği yoğun tarım arazilerinde, gerçek dünya koordinatlarıyla interaktif haritalama (Leaflet) yapmak için idealdir.
+- **Kaynaklar:** 
+  - **Makale:** [A dataset of aligned RGB and multispectral UAV imagery for semantic segmentation of weedy rice (ScienceDirect)](https://www.sciencedirect.com/science/article/pii/S2352340925009588)
+  - **Veri Seti:** [WeedyRice Mendeley Data](https://data.mendeley.com/datasets/vt4s83pxx6/1)
+
+## Kurulum
+
+Projeyi çalıştırmak için Python 3.8+ ortamında aşağıdaki kütüphanelerin yüklü olması gerekmektedir:
+>>>>>>> cd5d68b (update crop and weed detection and segmentation project)
 
 ```bash
-python test.py
+pip install torch torchvision ultralytics opencv-python numpy matplotlib fpdf
 ```
 
-**Çıktılar** (`sonuclar/` klasörüne kaydedilir):
+## Nasıl Kullanılır?
 
-| Dosya | Açıklama |
-|-------|----------|
-| `Gorev4_Test_Raporu.pdf` | Kapsamlı PDF rapor (genel özet + tarihsel analiz + per-image detay) |
-| `gorseller/` | Her görüntü için 4'lü karşılaştırma görseli |
-| `goruntu_ozet.csv` | Görüntü bazlı metrikler (IoU, sayım, alan) |
-| `tespit_detay.csv` | Her tespite ait koordinat ve alan bilgisi |
-| `tarihsel_ozet.csv` | Tarih bazlı büyüme istatistikleri |
-| `parsel_yogunluk.csv` | Parsel yoğunluk özeti |
-| `sonuclar.json` | Tüm verilerin JSON formatı |
+### WeedsGalore (YOLO) Kullanımı
+1. İndirdiğiniz YOLOv8 `best.pt` dosyasını `WeedsGalore` klasörünün içine atın.
+2. Terminalden klasöre girin: `cd WeedsGalore`
+3. **Eğitim (Train):** `python train.py` (Zipli veri setini soracaktır, yolunu belirtin).
+4. **Test (Toplu):** `python test.py` (Test klasöründeki görüntüleri analiz eder, PDF ve CSV üretir).
+5. **Tekil Analiz:** `python test_single.py yol/resim.JPG` (Tek bir resmi analiz eder).
 
+<<<<<<< HEAD
 ### 2. Tekil Görüntü Analizi
 
 Herhangi bir görseli model ile analiz eder. Etiket gerektirmez:
@@ -146,3 +171,10 @@ python train.py
 | Ortalama eşleşme | %77.6 |
 
 ---
+=======
+### WeedyRice (DeepLabV3+) Kullanımı
+1. İndirdiğiniz DeepLabV3+ `best.pt` dosyasını `WeedyRice` klasörünün içine atın.
+2. Terminalden klasöre girin: `cd WeedyRice`
+3. **Test ve Haritalama:** `python test.py` (Yabancı ot alanlarını ölçer, interaktif HTML haritası ve PDF rapor üretir).
+4. **Tekil Haritalama:** `python test_single.py yol/resim.JPG` (Tek görüntü üzerinden semantik alan çıkarır ve harita üretir).
+>>>>>>> cd5d68b (update crop and weed detection and segmentation project)

@@ -1,0 +1,24 @@
+{
+  "dataset_name": "WeedyRice-RGBMS-DB",
+  "class_names": [
+    "weedy_rice"
+  ],
+  "source_root": "/home/koesan/Videolar/DRONEQUBE/veri_seti/A Dataset of Aligned RGB and Multispectral UAV Ima/WeedyRice-RGBMS-DB",
+  "splits": {
+    "train": {
+      "images": 438,
+      "instances": 3938,
+      "foreground_pixels": 168095430
+    },
+    "val": {
+      "images": 148,
+      "instances": 1224,
+      "foreground_pixels": 56811988
+    },
+    "test": {
+      "images": 148,
+      "instances": 1181,
+      "foreground_pixels": 61085598
+    }
+  }
+}
