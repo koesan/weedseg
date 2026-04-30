@@ -16,7 +16,6 @@ from fpdf import FPDF
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "best.pt")
 
-# Arguman ayristirici
 parser = argparse.ArgumentParser(description="Tekil goruntu analizi")
 parser.add_argument("image", help="Analiz edilecek gorsel yolu")
 parser.add_argument("--conf", type=float, default=0.15, help="Confidence esigi (varsayilan: 0.15)")
@@ -42,7 +41,6 @@ def mask_centroid(binary_mask, fallback_xy):
         return cx, cy
     return fallback_xy
 
-# Cikti dizini (kodun bulundugu dizin/sonuclar/ icine)
 img_base = os.path.splitext(os.path.basename(IMG_PATH))[0]
 OUT_DIR = os.path.join(BASE_DIR, "sonuclar", f"tekil_{img_base}")
 os.makedirs(OUT_DIR, exist_ok=True)
@@ -51,7 +49,6 @@ print(f"Gorsel: {IMG_PATH}")
 print(f"Model:  {args.model}")
 print(f"GSD:    {args.gsd} mm/px | Conf: {CONF}\n")
 
-# Model yukle ve tahmin yap
 model = YOLO(args.model)
 img_bgr = cv2.imread(IMG_PATH)
 img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
@@ -92,7 +89,6 @@ soil_pct = round(100 - crop_pct - weed_pct, 2)
 
 print(f"Sonuc: Crop={pred_crop} Weed={pred_weed} | Yogunluk: %{weed_pct}")
 
-# Overlay fonksiyonu
 def overlay(img, mask, alpha=0.5):
     out = img.copy()
     out[mask == 1] = (out[mask == 1] * (1 - alpha) + np.array([0, 200, 0]) * alpha).astype(np.uint8)
@@ -126,13 +122,12 @@ plt.close()
 # 2) Detay gorseli
 fig, axes = plt.subplots(1, 3, figsize=(21, 7))
 
-# Pasta grafigi
 axes[0].pie([crop_area, weed_area, max(0, area_m2 - crop_area - weed_area)],
             labels=["Crop", "Weed", "Toprak"], autopct="%1.1f%%",
             colors=["#27ae60", "#e74c3c", "#bdc3c7"], startangle=90)
 axes[0].set_title(f"Alan Dagilimi\nToplam: {area_m2:.2f} m2", fontsize=12)
 
-# Sinif dagilimi
+# Snif dagilimi
 axes[1].bar(["Crop", "Weed"], [pred_crop, pred_weed], color=["#27ae60", "#e74c3c"], edgecolor="black")
 for i, v in enumerate([pred_crop, pred_weed]):
     axes[1].text(i, v + 0.5, str(v), ha="center", fontweight="bold", fontsize=14)
@@ -227,7 +222,6 @@ if os.path.exists(detay_path):
     pdf.image(detay_path, x=5, w=200)
 pdf.ln(3)
 
-# Detay tablosu
 pdf.set_font("Courier", "B", 9)
 pdf.cell(0, 6, "  Tespit Ozet Tablosu", new_x="LMARGIN", new_y="NEXT")
 pdf.set_font("Courier", "", 8)
