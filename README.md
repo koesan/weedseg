@@ -30,13 +30,15 @@ Bu ek çalışma, yoğun bitki örtüsünde nesne sayımının yarattığı hata
 
 ## Kurulum
 
-Projeyi çalıştırmak için Python 3.8+ ortamında aşağıdaki kütüphanelerin yüklü olması gerekmektedir:
+Projeyi çalıştırmak için aşağıdaki kütüphanelerin yüklü olması gerekmektedir:
 
 ```bash
 pip install torch torchvision ultralytics opencv-python numpy matplotlib fpdf
 ```
 
 ## Nasıl Kullanılır?
+
+Train kodları Google Colab için geliştirilmiştir. Kodları Colab ortamına yükleyip veri setlerini zip dosyası olarak belirtmeniz ve çıktıların kaydedileceği yolu tanımlamanız yeterlidir. Geri kalan işlemler kod tarafından otomatik olarak gerçekleştirilecektir.
 
 ### WeedsGalore (YOLO) Kullanımı
 1. İndirdiğiniz YOLOv8 `best.pt` dosyasını `WeedsGalore` klasörünün içine atın.
