@@ -13,7 +13,6 @@ import matplotlib.pyplot as plt
 from ultralytics import YOLO
 from fpdf import FPDF
 
-# Yollar (script dizinine gore)
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "best.pt")
 YOLO_DIR   = os.path.join(BASE_DIR, "yolo_dataset")
@@ -102,7 +101,6 @@ for idx, img_name in enumerate(test_images):
                 "area_px": area_px, "area_m2": round(area_px * GSD * GSD, 6),
             })
 
-    # IoU
     iou = {}
     for v, n in [(1, "crop"), (2, "weed")]:
         inter = np.logical_and(gt_mask == v, pred_mask == v).sum()
@@ -212,7 +210,7 @@ with open(csv_ozet, "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=fields); w.writeheader()
     for r in results: w.writerow({k: r[k] for k in fields})
 
-# Parsel yogunluk ozeti (Gorev 4 gereksinimi)
+# Parsel yogunluk ozeti
 parsel_csv = os.path.join(OUTPUT_DIR, "parsel_yogunluk.csv")
 with open(parsel_csv, "w", newline="") as f:
     w = csv.writer(f)
@@ -281,7 +279,6 @@ for d in dates:
     pdf.cell(0, 4, f"{d:<12} {len(dr):>3} {ta:>8.2f} {ca:>8.3f} {wa:>8.3f} {wa/ta*100:>6.1f} {np.mean([r['pred_weed'] for r in dr]):>7.1f}", new_x="LMARGIN", new_y="NEXT")
 pdf.ln(4)
 
-# Tarihsel buyume grafigi
 fig, axes = plt.subplots(2, 3, figsize=(22, 13))
 dx = np.arange(len(date_data)); dlbl = [d["date"] for d in date_data]
 axes[0][0].bar(dx-0.15, [d["gt_w"] for d in date_data], 0.3, label="GT", color="#c0392b")
@@ -333,7 +330,6 @@ for idx, r in enumerate(results):
     p = os.path.join(IMG_DIR, f"analiz_{idx:02d}.png")
     if os.path.exists(p): pdf.image(p, x=5, w=200)
     pdf.ln(3)
-    # Detayli tablo
     pdf.set_font("Courier", "B", 8)
     pdf.cell(0, 5, f"  Goruntu Detay Tablosu: {r['image']}", new_x="LMARGIN", new_y="NEXT")
     pdf.set_font("Courier", "", 7)
@@ -356,7 +352,6 @@ for idx, r in enumerate(results):
     pdf.cell(0, 4, f"  Crop IoU: {r['crop_iou']:.4f}  |  Weed IoU: {r['weed_iou']:.4f}  |  mIoU: {miou_r:.4f}", new_x="LMARGIN", new_y="NEXT")
     pdf.cell(0, 4, f"  Goruntu Alani: {r['img_area_m2']:.2f} m2  |  Yogunluk: %{r['weed_density_pct']:.1f}  |  GSD: 2.5mm/px", new_x="LMARGIN", new_y="NEXT")
     pdf.cell(0, 4, "-"*70, new_x="LMARGIN", new_y="NEXT")
-    # Bu goruntunun koordinatlari (ilk 10)
     img_dets = r["detections"]
     if img_dets:
         pdf.ln(2)
