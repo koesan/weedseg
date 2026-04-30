@@ -10,11 +10,14 @@ Aşağıdaki Google Drive bağlantısından gerekli model ağırlıklarını (`b
 Depo içerisinde iki farklı yaklaşım ve model barındıran iki klasör bulunmaktadır:
 
 ### 1. WeedsGalore (YOLOv8l-seg)
-Bu proje, mısır tarlalarındaki yabancı otları **Nesne Bölütleme (Instance Segmentation)** yöntemiyle tespit eder. 
+Bu proje, mısır tarlalarındaki yabancı otları **Nesne Bölütleme** yöntemiyle tespit eder. 
 - **Veri Seti:** WeedsGalore (Farklı büyüme evrelerini içerir).
 - **Model:** YOLOv8l-seg.
 - **Mantık:** Yabancı otları nesne olarak algılar, poligon çıkarır ve GSD (Yer Örnekleme Mesafesi) kullanarak lokal metre cinsinden (X, Y) alan/yoğunluk hesabı yapar.
 - **Kullanım Yeri:** Erken büyüme evrelerindeki ayrık otların tespiti için idealdir.
+- **WeedsGalore Makalesi (ArXiv):** https://arxiv.org/abs/2502.13103
+- **WeedsGalore Veri Seti ve Kod Deposu:** https://github.com/GFZ/weedsgalore
+
 
 ### 2. WeedyRice (DeepLabV3+)
 Bu ek çalışma, yoğun bitki örtüsünde nesne sayımının yarattığı hataları (over-count) önlemek amacıyla **Semantik Segmentasyon (Alan Bazlı)** olarak geliştirilmiştir.
@@ -22,6 +25,8 @@ Bu ek çalışma, yoğun bitki örtüsünde nesne sayımının yarattığı hata
 - **Model:** DeepLabV3+
 - **Mantık:** Bitkileri tek tek saymaz, yalnızca "yabancı ot alanını" ölçer. Metadata dosyasındaki gerçek GPS verilerini kullanarak tespitleri harita üzerinde küresel koordinatlarla (WGS84 Enlem/Boylam) konumlandırır.
 - **Kullanım Yeri:** Bitkilerin birbirine geçtiği yoğun tarım arazilerinde, gerçek dünya koordinatlarıyla interaktif haritalama (Leaflet) yapmak için idealdir.
+- **Weedy Rice Makalesi:** https://www.sciencedirect.com/science/article/pii/S2352340925009588
+- **Weedsrice Veri Seti:** https://data.mendeley.com/datasets/vt4s83pxx6/1
 
 ## Kurulum
 
