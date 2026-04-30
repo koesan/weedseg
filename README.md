@@ -52,3 +52,10 @@ Train kodları Google Colab için geliştirilmiştir. Kodları Colab ortamına y
 2. Terminalden klasöre girin: `cd WeedyRice`
 3. **Test ve Haritalama:** `python test.py` (Yabancı ot alanlarını ölçer, interaktif HTML haritası ve PDF rapor üretir).
 4. **Tekil Haritalama:** `python test_single.py yol/resim.JPG` (Tek görüntü üzerinden semantik alan çıkarır ve harita üretir).
+
+## Kaynaklar ve Önceki Çalışmalar
+
+- [Dron Görüntülerinde Segmentasyon](https://github.com/koesan/U-Net) - U-Net kullanarak drone görüntüleri üzerinde gerçekleştirdiğim segmentasyon çalışması.
+- [Brain Tumor Segmentation](https://github.com/koesan/Brain_Segmentation) - Beyin tümörü segmentasyonu üzerine gerçekleştirdiğim çalışma.
+
+
