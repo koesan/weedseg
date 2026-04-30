@@ -1,6 +1,6 @@
-# DRONEQUBE - Yabancı Ot Tespiti ve Konumlandırma (Görev 4)
+# weedseg
 
-Bu depo, DRONEQUBE İnsansız Hava Aracı (İHA) sistemleri için tarım alanlarındaki yabancı otların (weed) tespit edilmesi ve gerçek dünya koordinatlarında (georeference) konumlandırılması amacıyla geliştirilmiş iki farklı projeyi içermektedir.
+Bu depo, İnsansız Hava Aracı (İHA) sistemleri için tarım alanlarındaki yabancı otların (weed) tespit edilmesi ve gerçek dünya koordinatlarında (georeference) konumlandırılması amacıyla geliştirilmiş iki farklı projeyi içermektedir.
 
 Aşağıdaki Google Drive bağlantısından gerekli model ağırlıklarını (`best.pt`) indirip, her modelin kendi klasörüne eklemeniz gerekmektedir:
 📥 **[Model Ağırlıklarını İndir (Google Drive)](https://drive.google.com/drive/folders/1nB4qQeIFdyFNywe3V92VN5Hj5yg3jVsz?usp=drive_link)**
